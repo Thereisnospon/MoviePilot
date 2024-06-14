@@ -16,4 +16,6 @@ config/sites/**
 *.pyc
 *.log
 .vscode
+submodule/
 venv
+s
