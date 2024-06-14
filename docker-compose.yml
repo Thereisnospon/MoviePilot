@@ -1,0 +1,31 @@
+services:
+  moviepilot:
+    container_name: moviepilot
+    image: thereisnospon/movie_pilot:0.4
+    restart: always
+    volumes:
+      - 'vol_mp_media:/media'
+      - 'vol_mp_config:/config'
+      - 'vol_mp_core:/moviepilot/.cache/ms-playwright'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    ports:
+      - 3000:3000
+      - 3001:3001
+    environment:
+      - 'NGINX_PORT=3000'
+      - 'PORT=3001'
+      - 'PUID=0'
+      - 'PGID=0'
+      - 'UMASK=000'
+      - 'TZ=Asia/Shanghai'
+      - 'AUTH_SITE=iyuu'
+      - 'IYUU_SIGN=xxxx'
+      - 'SUPERUSER=admin'
+      - 'API_TOKEN=moviepilot'
+volumes:
+  vol_mp_config:
+    external: true
+  vol_mp_media:
+    external: true
+  vol_mp_core:
+    external: true

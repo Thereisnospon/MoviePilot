@@ -130,20 +130,26 @@ else
     download_link="https://beta.rclone.org/rclone-beta-latest-${OS}-${OS_type}.zip"
     rclone_zip="rclone-beta-latest-${OS}-${OS_type}.zip"
 fi
+pwd
 
-printf "download $download_link"
+cp /app/rclone-current-linux-amd64.zip rclone-current-linux-amd64.zip
+ls -l "$rclone_zip"
+printf "download $download_link $rclone_zip\n"
 
-curl -OfsS "$download_link"
+#curl -OfsS "$download_link"
 unzip_dir="tmp_unzip_dir_for_rclone"
 # there should be an entry in this switch for each element of unzip_tools_list
 case "$unzip_tool" in
   'unzip')
+    echo "$rclone_zip"  "$unzip_dir"
     unzip -a "$rclone_zip" -d "$unzip_dir"
     ;;
   '7z')
+    echo "$rclone_zip"  "$unzip_dir"
     7z x "$rclone_zip" "-o$unzip_dir"
     ;;
   'busybox')
+   echo "$rclone_zip"  "$unzip_dir"
     mkdir -p "$unzip_dir"
     busybox unzip "$rclone_zip" -d "$unzip_dir"
     ;;
